@@ -37,8 +37,10 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
       type="submit"
       className="ml-4 flex-none"
       onClick={() => {
-        sendMessage(input)
-        setInput('')
+		if (input) {
+			sendMessage(input)
+        	setInput('')
+		}
       }}
     >
       Say
@@ -63,7 +65,7 @@ export function Chat() {
   // send message to API /api/chat endpoint
   const sendMessage = async (message: string) => {
     setLoading(true)
-	
+	await new Promise(f => setTimeout(f, 800));
     const newMessages = [
       ...messages,
       { role: 'user', content: message } as ChatGPTMessage,
