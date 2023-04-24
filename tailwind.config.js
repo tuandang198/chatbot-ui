@@ -6,4 +6,9 @@ module.exports = {
     './node_modules/@vercel/examples-ui/**/*.js',
   ],
 //   darkMode: 'class',
+
+plugins: [
+    require('@tailwindcss/typography'),
+    // ...
+  ],
 }
