@@ -39,7 +39,6 @@ export function ChatLine({ role = 'assistant', content }: ChatGPTMessage) {
 	if (!content) {
 		return null
 	}
-	const markdown = `I **love** using [Next.js](https://nextjs.org/)`
 	return (
 		<div className='float-left clear-both w-full'>
 			<div className={clsx(
@@ -57,7 +56,7 @@ export function ChatLine({ role = 'assistant', content }: ChatGPTMessage) {
 						</p>
 						<div className='prose prose-invert prose-headings:underline prose-a:text-blue-600'>
 							<ReactMarkdown>
-								{markdown}
+								{content}
 							</ReactMarkdown>
 						</div>
 					</div>
