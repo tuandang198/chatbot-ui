@@ -91,50 +91,52 @@ export function Chat() {
 		]
 
 		setMessages(newMessages)
-		// const response = await fetch(BASE_URL, {
-		//   method: 'POST',
-		//   headers: {
-		//     'Content-Type': 'application/json',
-		//   },
-		//   body: JSON.stringify({
-		//
-		// 		uid: "string",
-		// 		message: message,
-		// 		relevant_degree: 2
-		//
-		//   }),
-		// })
-		// if (!response.ok) {
-		// 	console.log(response,"sssssssssssssss11111111111");
-		// 	return ErrorPopup;
-		// }
-		//
-		// // This data is a ReadableStream
-		//
-		// const data = response.body
-		//
-		// if (!data) {
-		//   return
-		// }
-		//
-		// const reader = data.getReader()
-		// const decoder = new TextDecoder()
-		//
-		// let done = false
-		//
-		// let lastMessage = ''
-		//
-		// while (!done) {
-		//   const { value, done: doneReading } = await reader.read()
-		//   done = doneReading
-		//   const chunkValue = decoder.decode(value)
-		//   lastMessage = lastMessage + chunkValue
-		//
-		// }
+		console.log(process.env.NEXT_PUBLIC_API_URL,'ddddddddddd-----------------------------');
+		
+		const response = await fetch(BASE_URL, {
+		  method: 'POST',
+		  headers: {
+		    'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({
+		
+				uid: "string",
+				question: message,
+				relevant_degree: 2
+		
+		  }),
+		})
+		if (!response.ok) {
+			console.log(response,"sssssssssssssss11111111111");
+			return ErrorPopup;
+		}
+		
+		// This data is a ReadableStream
+		
+		const data = response.body
+		
+		if (!data) {
+		  return
+		}
+		
+		const reader = data.getReader()
+		const decoder = new TextDecoder()
+		
+		let done = false
+		
+		let lastMessage = ''
+		
+		while (!done) {
+		  const { value, done: doneReading } = await reader.read()
+		  done = doneReading
+		  const chunkValue = decoder.decode(value)
+		  lastMessage = lastMessage + chunkValue
+		
+		}
 		setMessages([
 			...newMessages,
 			{
-				role: 'assistant', content: "JSON.parse(lastMessage).AI_messagedssssssssssssssssssssssssssssAI_messagedssssssssssssssssssssssssssssAI_messagedssssssssssssssssssssssssssssAI_messagedssssssssssssssssssssssssssssAI_messagedssssssssssssssssssssssssssssAI_messagedssssssssssssssssssssssssssssAI_messagedssssssssssssssssssssssssssss"
+				role: 'assistant', content: JSON.parse(lastMessage).AI_message
 			} as ChatGPTMessage,
 		])
 		setLoading(false)

@@ -14,4 +14,7 @@ module.exports = {
 
         return config;
     },
+    // env: {
+    //     HOST: 'localhost:3000',
+    //   },
 };
