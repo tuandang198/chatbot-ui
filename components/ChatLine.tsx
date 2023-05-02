@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 // import Balancer from 'react-wrap-balancer'
 import ReactMarkdown from 'react-markdown';
+import {scrollToBottom} from "./ScrollToBottom";
 
 
 // wrap Balancer to remove type errors :( - @TODO - fix this ugly hack
