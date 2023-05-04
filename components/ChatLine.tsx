@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 // import Balancer from 'react-wrap-balancer'
 import ReactMarkdown from 'react-markdown';
-import {scrollToBottom} from "./ScrollToBottom";
+import rehypeRaw from "rehype-raw";
 
 
 // wrap Balancer to remove type errors :( - @TODO - fix this ugly hack
@@ -20,7 +20,7 @@ export const LoadingChatLine = () => (
 		<div className="flex flex-grow space-x-3">
 			<div className="min-w-0 flex-1">
 				<p className="font-large text-xxl text-gray-900">
-					<a href="#" className="hover:underline">
+					<a href="" className="hover:underline">
 						AI
 					</a>
 				</p>
@@ -50,13 +50,13 @@ export function ChatLine({ role = 'assistant', content }: ChatGPTMessage) {
 				<div className="flex space-x-3 ">
 					<div className="flex-1 gap-4 w-full">
 						<p className="font-large text-xxl">
-							<a href="#"
+							<a href=""
 								className="hover:underline">
 								{role == 'assistant' ? 'AI' : 'You'}
 							</a>
 						</p>
 						<div className='prose prose-invert prose-headings:underline prose-a:text-blue-600'>
-							<ReactMarkdown>
+							<ReactMarkdown rehypePlugins={[rehypeRaw]}>
 								{content}
 							</ReactMarkdown>
 						</div>

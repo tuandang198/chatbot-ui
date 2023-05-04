@@ -1,5 +1,4 @@
 const ErrorPage: React.FC = () => {
-    // console.log("dddddddddddd")
     return (
         <div>
             <h1>Error Page</h1>

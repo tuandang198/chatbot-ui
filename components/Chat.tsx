@@ -7,6 +7,7 @@ import ErrorPopup from "./ErrorPage";
 import CustomError from "../utils/CustomError";
 import {scrollToBottom} from "./ScrollToBottom";
 const COOKIE_NAME = 'nextjs-example-ai-chat-gpt3'
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export const initialMessages: ChatGPTMessage[] = [
 	{
@@ -72,7 +73,6 @@ export function Chat() {
 	}, [messages]);
 
 	const scrollToBottom = () => {
-		console.log('scrollToBottom')
 		if (containerRef.current) {
 			window.scroll({
 				top: document.body.offsetHeight,
@@ -91,54 +91,55 @@ export function Chat() {
 		]
 
 		setMessages(newMessages)
-		console.log(process.env.NEXT_PUBLIC_API_URL,'ddddddddddd-----------------------------');
-		
+
 		const response = await fetch(BASE_URL, {
 		  method: 'POST',
 		  headers: {
 		    'Content-Type': 'application/json',
 		  },
 		  body: JSON.stringify({
-		
+
 				uid: "string",
 				question: message,
 				relevant_degree: 2
-		
+
 		  }),
 		})
 		if (!response.ok) {
-			console.log(response,"sssssssssssssss11111111111");
-			return ErrorPopup;
-		}
-		
+			Notify.failure(response.statusText)
+		}else {
 		// This data is a ReadableStream
-		
 		const data = response.body
-		
+
 		if (!data) {
 		  return
 		}
-		
+
 		const reader = data.getReader()
 		const decoder = new TextDecoder()
-		
+
 		let done = false
-		
+
 		let lastMessage = ''
-		
+
 		while (!done) {
 		  const { value, done: doneReading } = await reader.read()
 		  done = doneReading
 		  const chunkValue = decoder.decode(value)
 		  lastMessage = lastMessage + chunkValue
-		
+
 		}
 		setMessages([
 			...newMessages,
 			{
-				role: 'assistant', content: JSON.parse(lastMessage).AI_message
+				role: 'assistant',
+				content: "## LIBRA ANSWER: \n" +
+					JSON.parse(lastMessage).AI_message
+					+ "\n## CITATION:\n" +
+					JSON.parse(lastMessage).AI_references
 			} as ChatGPTMessage,
 		])
+	}
 		setLoading(false)
 	}
 

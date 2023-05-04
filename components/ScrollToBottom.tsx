@@ -8,7 +8,6 @@ export const scrollToBottom = () => {
 
     const scrollStepFunc = () => {
         if (document.documentElement.scrollTop < (scrollHeight - windowHeight)) {
-            // console.log('1111dddddsa')
 
             scrollCount += 1;
             scrollPosition = Math.round(

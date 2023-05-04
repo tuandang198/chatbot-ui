@@ -8,7 +8,6 @@ export default function Header() {
 		<a href='/' className = "font-bold text-xl">
 		 LIBRA
 		</a>
-		
 	  </header>
 	);
   }
