@@ -28,10 +28,10 @@ pnpm create next-app --example https://github.com/vercel/examples/tree/main/solu
 
 #### Set up environment variables
 
-Rename [`.env.example`](.env.example) to `.env.local`:
+Rename [`.env.example`](.env.local) to `.env.local`:
 
 ```bash
-cp .env.example .env.local
+cp .env.local.example .env.local.local
 ```
 
 then, update `OPENAI_API_KEY` with your [OpenAI](https://beta.openai.com/account/api-keys) secret key.
